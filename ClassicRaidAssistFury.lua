@@ -10,17 +10,17 @@ for i=1, MAX_NUMBER_OF_UNITS do
     list_of_units[i] = nil
 end
 
-local announcePrefix = "CRA_announce"
-local questionPrefix = "CRA_question"
-local scanSendPrefix = "CRA_scansend"
-local scanRecievePrefix = "CRA_scanrecieve"
-local questionItemPrefix = "CRA_questionitem"
-local sendItemPrefix = "CRA_senditem"
-local sendBadItemPrefix = "CRA_sendbaditem"
-local consumableQuestionItemPrefix = "CRA_cqi"
-local consumableSendItemPrefix = "CRA_csi"
-local consumableQuestionBuffPrefix = "CRA_cqb"
-local consumableSendBuffPrefix = "CRA_csb"
+local announcePrefix = "CRAF_announce"
+local questionPrefix = "CRAF_question"
+local scanSendPrefix = "CRAF_scansend"
+local scanRecievePrefix = "CRAF_scanrecieve"
+local questionItemPrefix = "CRAF_questionitem"
+local sendItemPrefix = "CRAF_senditem"
+local sendBadItemPrefix = "CRAF_sendbaditem"
+local consumableQuestionItemPrefix = "CRAF_cqi"
+local consumableSendItemPrefix = "CRAF_csi"
+local consumableQuestionBuffPrefix = "CRAF_cqb"
+local consumableSendBuffPrefix = "CRAF_csb"
 
 local version = GetAddOnMetadata("ClassicRaidAssistFury", "Version")
 ClassicRaidAssistFury.version = version
