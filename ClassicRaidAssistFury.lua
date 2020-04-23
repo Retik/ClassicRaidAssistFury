@@ -10,13 +10,13 @@ for i=1, MAX_NUMBER_OF_UNITS do
     list_of_units[i] = nil
 end
 
-local announcePrefix = "CRAF_announce"
-local questionPrefix = "CRAF_question"
-local scanSendPrefix = "CRAF_scansend"
-local scanRecievePrefix = "CRAF_scanrecieve"
-local questionItemPrefix = "CRAF_questionitem"
-local sendItemPrefix = "CRAF_senditem"
-local sendBadItemPrefix = "CRAF_sendbaditem"
+local announcePrefix = "CRAF_a"
+local questionPrefix = "CRAF_q"
+local scanSendPrefix = "CRAF_ss"
+local scanRecievePrefix = "CRAF_sr"
+local questionItemPrefix = "CRAF_qi"
+local sendItemPrefix = "CRAF_si"
+local sendBadItemPrefix = "CRAF_sbi"
 local consumableQuestionItemPrefix = "CRAF_cqi"
 local consumableSendItemPrefix = "CRAF_csi"
 local consumableQuestionBuffPrefix = "CRAF_cqb"
