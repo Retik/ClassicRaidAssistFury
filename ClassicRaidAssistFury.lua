@@ -70,7 +70,7 @@ function ClassicRaidAssistFury:OnInitialize()
             settingsContainer = nil,
             consumablesContainer = nil,
             currentTab = "raidBuffs",
-            currentSpecTab = "Warlock",
+            currentSpecTab = "All Classes",
             currentConsumableType = "ITEM"
         }
     }, true)

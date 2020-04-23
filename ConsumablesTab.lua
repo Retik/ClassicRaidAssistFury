@@ -218,84 +218,82 @@ local function DrawCurrentClassConsumables()
 end
 
 function ConsumablesTab:outputBuffs(channel, type, spec)
-    if type == "ITEM" then
-        local missingItems = {}
-        for key, value in pairs(specs[spec]['currentItems']) do
-            for k, v in pairs(value) do
-                if(missingItems[k] == nil) then
-                    missingItems[k] = {}
-                end
+    if type ~= "ITEM" and type ~= "BUFF" then
+        return
+    end
 
-                if(v == "0") then
-                    table.insert(missingItems[k], key)
-                end
+    local knownPlayers = {}
+    for key, value in pairs(specs[spec][(type == "ITEM" and "currentItems" or "currentBuffs")]) do
+        knownPlayers[key] = true
+    end
+
+    local missingItemsOrBuffs = {}
+    for key, value in pairs(specs[spec][(type == "ITEM" and "currentItems" or "currentBuffs")]) do
+        for k, v in pairs(value) do
+            if(missingItemsOrBuffs[k] == nil) then
+                missingItemsOrBuffs[k] = {}
+            end
+
+            if(v == "0") then
+                table.insert(missingItemsOrBuffs[k], key)
             end
         end
+    end
 
-        initialMessageSent = true
-        for key, value in pairs(missingItems) do
-            local beginningString = key .. ":"
-            local stringCompose = beginningString
-            for k, v in pairs(value) do
-                stringToAdd = v .. ","
+    local introMessage = "[Classic Raid Assist Fury] Ouputting " .. spec .." Missing Consumable " .. (type == "ITEM" and "Items" or "Buffs") .. ": "
+
+    local initialMessageSent = true
+    local stringCompose = ""
+    for key, value in pairs(missingItemsOrBuffs) do
+        local beginningString = key .. ":"
+        stringCompose = beginningString
+        for k, v in pairs(value) do
+            local stringToAdd = v .. ","
+            if ( string.len(stringCompose) + string.len(stringToAdd) ) >= 255 then    
+                if initialMessageSent then
+                    initialMessageSent = false
+                    CRA_SendChatMessage(introMessage, channel)
+                end
+                CRA_SendChatMessage(stringCompose:sub(1, -2), channel)
+                stringCompose = beginningString
+            end
+            stringCompose = stringCompose .. " " .. stringToAdd
+        end
+        if(stringCompose ~= beginningString) then
+            if initialMessageSent then
+                initialMessageSent = false
+                CRA_SendChatMessage(introMessage, channel)
+            end
+            CRA_SendChatMessage(stringCompose:sub(1, -2), channel)
+        end
+    end
+
+    -- List players with unknown item/buff status
+    local unknownPlayersBeginning = "Unknown:"
+    stringCompose = unknownPlayersBeginning
+    for i = 1, MAX_RAID_MEMBERS do
+        local tempPlayerName, _, subgroup, _, class, englishClass = GetRaidRosterInfo(i)
+        if(tempPlayerName ~= nil and class ~= nil) then
+            if not knownPlayers[tempPlayerName] then
+                local stringToAdd = tempPlayerName .. ","
                 if ( string.len(stringCompose) + string.len(stringToAdd) ) >= 255 then    
                     if initialMessageSent then
                         initialMessageSent = false
-                        CRA_SendChatMessage("[Classic Raid Assist Fury] Ouputting " .. spec .." Missing Consumable Items: ", channel)
+                        CRA_SendChatMessage(introMessage, channel)
                     end
                     CRA_SendChatMessage(stringCompose:sub(1, -2), channel)
-                    stringCompose = beginningString
+                    stringCompose = unknownPlayersBeginning
                 end
                 stringCompose = stringCompose .. " " .. stringToAdd
             end
-            if(stringCompose ~= beginningString) then
-                if initialMessageSent then
-                    initialMessageSent = false
-                    CRA_SendChatMessage("[Classic Raid Assist Fury] Ouputting " .. spec .." Missing Consumable Items: ", channel)
-                end
-                CRA_SendChatMessage(stringCompose:sub(1, -2), channel)
-            end
         end
-    elseif type == "BUFF" then
-        local missingBuffs = {}
-        for key, value in pairs(specs[spec]['currentBuffs']) do
-            for k, v in pairs(value) do
-                if(missingBuffs[k] == nil) then
-                    missingBuffs[k] = {}
-                end
-
-                if(v == "0") then
-                    table.insert(missingBuffs[k], key)
-                end
-            end
+    end
+    if(stringCompose ~= unknownPlayersBeginning) then
+        if initialMessageSent then
+            initialMessageSent = false
+            CRA_SendChatMessage(introMessage, channel)
         end
-        
-        
-        initialMessageSent = true
-
-        for key, value in pairs(missingBuffs) do
-            local beginningString = key .. ":"
-            local stringCompose = beginningString
-            for k, v in pairs(value) do
-                stringToAdd = v .. ","
-                if ( string.len(stringCompose) + string.len(stringToAdd) ) >= 255 then
-                    if initialMessageSent then
-                        initialMessageSent = false
-                        CRA_SendChatMessage("[Classic Raid Assist Fury] Ouputting " .. spec .." Missing Consumable Buffs: ", channel)
-                    end
-                    CRA_SendChatMessage(stringCompose:sub(1, -2), channel)
-                    stringCompose = beginningString
-                end
-                stringCompose = stringCompose .. " " .. stringToAdd
-            end
-            if(stringCompose ~= beginningString) then
-                if initialMessageSent then
-                    initialMessageSent = false
-                    CRA_SendChatMessage("[Classic Raid Assist Fury] Ouputting " .. spec .." Missing Consumable Buffs: ", channel)
-                end
-                CRA_SendChatMessage(stringCompose:sub(1, -2), channel)
-            end
-        end
+        CRA_SendChatMessage(stringCompose:sub(1, -2), channel)
     end
 end
 
