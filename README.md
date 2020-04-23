@@ -34,4 +34,4 @@ If you open up the Raid Items tab you can select from a drop down which items to
 The Settings tab allows you to control settings, such as not allowing item scanning, and to scan your raid to see what versions of the addon they have, if at all. Its important to make sure people have the addon for the Raid Items and Looting portions of the addon to work properly.
 
 ## Smart Buff Filtering:
-Smart buff filtering allows you to not show classes that dont need certain buffs, for instance a Warrior doesnt need Arcane Intellect and a Warlock doesnt need Blessing of Might. If you notice that there are other combos that dont need certain buffs please feel free to leave a comment below so I can add it in!
+Smart buff filtering allows you to not show classes that dont need certain buffs, for instance a Warrior doesnt need Arcane Intellect and a Warlock doesnt need Blessing of Might. If you notice that there are other combos that dont need certain buffs please feel free to open an issue so I can add it in!
