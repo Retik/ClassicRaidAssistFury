@@ -65,9 +65,9 @@ local function ScanRaidItems()
 
     local leftContainer = AceGUI:Create("SimpleGroup")
     local rightContainer = AceGUI:Create("SimpleGroup")
-    leftContainer:SetWidth(180)
+    leftContainer:SetWidth(190)
     leftContainer:SetLayout("Flow")
-    rightContainer:SetWidth(180)
+    rightContainer:SetWidth(190)
     rightContainer:SetLayout("Flow")
 
     for i = 1, MAX_RAID_MEMBERS do
@@ -102,7 +102,7 @@ local function ScanRaidItems()
             playerContainer:SetLayout("Flow")
             playerContainer:SetFullWidth(true)
             local currName = AceGUI:Create("Label")
-            currName:SetWidth(90)
+            currName:SetWidth(150)
             currName.characterName = k
             currName:SetText("|c" .. RAID_CLASS_COLORS[v['class']].colorStr .. k .. "|r")
             playerContainer:AddChild(currName)

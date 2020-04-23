@@ -31,6 +31,13 @@ local raidBuffNames = {
         ["short"] = "Int",
         ["missingThisBuff"] = {},
         ["smartFiltering"] = true
+    },
+    ["Shadow Protection"] = {
+        ["alts"] = {"10958"},
+        ["icon"] = "Interface\\Icons\\spell_shadow_antishadow",
+        ["short"] = "ShadowProt",
+        ["missingThisBuff"] = {},
+        ["smartFiltering"] = true
     }
 }
 
@@ -80,9 +87,9 @@ function RaidBuffsTab:ScanRaidBuffs()
 
     local leftContainer = AceGUI:Create("SimpleGroup")
     local rightContainer = AceGUI:Create("SimpleGroup")
-    leftContainer:SetWidth(180)
+    leftContainer:SetWidth(190)
     leftContainer:SetLayout("Flow")
-    rightContainer:SetWidth(180)
+    rightContainer:SetWidth(190)
     rightContainer:SetLayout("Flow")
 
     for i = 1, MAX_RAID_MEMBERS do
@@ -161,7 +168,7 @@ function RaidBuffsTab:ScanRaidBuffs()
             -- playerContainer:SetHeight(20)
 
             local currName = AceGUI:Create("Label")
-            currName:SetWidth(90)
+            currName:SetWidth(96)
             currName.characterName = k
             currName:SetText("|c" .. RAID_CLASS_COLORS[v['class']].colorStr .. k .. "|r")
             -- RegisterUnitWatch(currName.frame) 
@@ -194,38 +201,38 @@ function RaidBuffsTab:ScanRaidBuffs()
                 currSpell:SetImage("Interface\\Icons\\spell_holy_magicalsentry")
                 currSpell.image:SetColorTexture(0.5, 0.5, 0.5, 0.0);
                 currSpell:SetDisabled(true)
-                currSpell:SetImageSize("16", "16")
+                currSpell:SetImageSize("14", "14")
                 currSpell.image:SetAllPoints()
-                currSpell:SetWidth(16)
-                currSpell:SetHeight(16)
-                playerContainer:AddChild(currSpell) 
+                currSpell:SetWidth(14)
+                currSpell:SetHeight(14)
+                playerContainer:AddChild(currSpell)
             end
 
             for spellName, value in pairs(v['spellsMissing']) do
                 if value == nil or value['missingBuff'] == 0 then
                     local currSpell = AceGUI:Create("Icon")
                     currSpell:SetImage("Interface\\Icons\\spell_chargenegative")
-                    currSpell:SetImageSize("16", "16")
+                    currSpell:SetImageSize("14", "14")
                     currSpell:SetDisabled(true)
                     currSpell.image:SetAllPoints()
                     currSpell.image:SetVertexColor(1, 1, 1, 0.5)
-                    currSpell:SetWidth(16)
-                    currSpell:SetHeight(16)
+                    currSpell:SetWidth(14)
+                    currSpell:SetHeight(14)
                     playerContainer:AddChild(currSpell)
                 elseif value == nil or not not value['missingBuff'] then
                     local currSpell = AceGUI:Create("Icon")
                     currSpell:SetImage(raidBuffNames[spellName]["icon"])
-                    currSpell:SetImageSize("16", "16")
+                    currSpell:SetImageSize("14", "14")
                     currSpell:SetDisabled(true)
                     currSpell.image:SetAllPoints()
                     currSpell.image:SetVertexColor(1, 1, 1, 0.1)
-                    currSpell:SetWidth(16)
-                    currSpell:SetHeight(16)
+                    currSpell:SetWidth(14)
+                    currSpell:SetHeight(14)
                     playerContainer:AddChild(currSpell)
                 else
                     local currSpell = AceGUI:Create("Icon")
                     currSpell:SetImage(raidBuffNames[spellName]["icon"])
-                    currSpell:SetImageSize("16", "16")
+                    currSpell:SetImageSize("14", "14")
                     currSpell:SetDisabled(true)
                     
                     currSpell.image:SetAllPoints()
@@ -237,8 +244,8 @@ function RaidBuffsTab:ScanRaidBuffs()
                     -- myCooldown:SetReverse(true)
                     -- tinsert(cooldownFrames, myCooldown)
 
-                    currSpell:SetWidth(16)
-                    currSpell:SetHeight(16)
+                    currSpell:SetWidth(14)
+                    currSpell:SetHeight(14)
 
                     -- playerContainer:AddChildTest(myCooldown)
                     playerContainer:AddChild(currSpell)
@@ -264,9 +271,9 @@ function RaidBuffsTab:ScanRaidBuffs()
             currSpell.image:SetAllPoints()
             currSpell.image:SetColorTexture(0.5, 0.5, 0.5, 0.0);
             currSpell:SetDisabled(true)
-            currSpell:SetImageSize("16", "16")
-            currSpell:SetWidth(16)
-            currSpell:SetHeight(16)
+            currSpell:SetImageSize("14", "14")
+            currSpell:SetWidth(14)
+            currSpell:SetHeight(14)
             playerContainer:AddChild(currSpell) 
 
             groupContainer:AddChild(playerContainer)
@@ -328,7 +335,7 @@ function RaidBuffsTab:DrawRaidBuffs(container)
 
     local spellName = "Prayer of Fortitude"
     local prayerOfFortitude = AceGUI:Create("CheckBox")
-    prayerOfFortitude:SetWidth(90)
+    prayerOfFortitude:SetWidth(70)
     prayerOfFortitude:SetLabel("")
     prayerOfFortitude:SetValue(ClassicRaidAssistFury.db.char.buffsToCheckFor[spellName])
     prayerOfFortitude:SetImage(raidBuffNames[spellName]["icon"])
@@ -337,7 +344,7 @@ function RaidBuffsTab:DrawRaidBuffs(container)
 
     local spellName = "Prayer of Spirit"
     local prayerOfSpirit = AceGUI:Create("CheckBox")
-    prayerOfSpirit:SetWidth(90)
+    prayerOfSpirit:SetWidth(70)
     prayerOfSpirit:SetLabel("")
     prayerOfSpirit:SetValue(ClassicRaidAssistFury.db.char.buffsToCheckFor[spellName])
     prayerOfSpirit:SetImage(raidBuffNames[spellName]["icon"])
@@ -346,7 +353,7 @@ function RaidBuffsTab:DrawRaidBuffs(container)
 
     local spellName = "Gift of the Wild"
     local giftOfTheWild = AceGUI:Create("CheckBox")
-    giftOfTheWild:SetWidth(90)
+    giftOfTheWild:SetWidth(70)
     giftOfTheWild:SetLabel("")
     giftOfTheWild:SetValue(ClassicRaidAssistFury.db.char.buffsToCheckFor[spellName])
     giftOfTheWild:SetImage(raidBuffNames[spellName]["icon"])
@@ -355,12 +362,21 @@ function RaidBuffsTab:DrawRaidBuffs(container)
 
     local spellName = "Arcane Intellect"
     local arcaneIntellect = AceGUI:Create("CheckBox")
-    arcaneIntellect:SetWidth(50)
+    arcaneIntellect:SetWidth(70)
     arcaneIntellect:SetLabel("")
     arcaneIntellect:SetValue(ClassicRaidAssistFury.db.char.buffsToCheckFor[spellName])
     arcaneIntellect:SetImage(raidBuffNames[spellName]["icon"])
     arcaneIntellect:SetCallback("OnValueChanged", function() OnValueChanged(spellName) end)
     checkBoxContainer:AddChild(arcaneIntellect)
+
+    local spellName = "Shadow Protection"
+    local shadowProtection = AceGUI:Create("CheckBox")
+    shadowProtection:SetWidth(70)
+    shadowProtection:SetLabel("")
+    shadowProtection:SetValue(ClassicRaidAssistFury.db.char.buffsToCheckFor[spellName])
+    shadowProtection:SetImage(raidBuffNames[spellName]["icon"])
+    shadowProtection:SetCallback("OnValueChanged", function() OnValueChanged(spellName) end)
+    checkBoxContainer:AddChild(shadowProtection)
 
     container:AddChild(checkBoxContainer)
 

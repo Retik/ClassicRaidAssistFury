@@ -83,9 +83,9 @@ function WorldBuffsTab:ScanWorldBuffs()
 
     local leftContainer = AceGUI:Create("SimpleGroup")
     local rightContainer = AceGUI:Create("SimpleGroup")
-    leftContainer:SetWidth(180)
+    leftContainer:SetWidth(190)
     leftContainer:SetLayout("Flow")
-    rightContainer:SetWidth(180)
+    rightContainer:SetWidth(190)
     rightContainer:SetLayout("Flow")
 
     for i = 1, MAX_RAID_MEMBERS do
@@ -161,7 +161,7 @@ function WorldBuffsTab:ScanWorldBuffs()
             -- playerContainer:SetHeight(16)
 
             local currName = AceGUI:Create("Label")
-            currName:SetWidth(80)
+            currName:SetWidth(96)
             currName.characterName = k
             -- print(k)
             -- print(v['class'])

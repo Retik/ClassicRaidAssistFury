@@ -122,7 +122,6 @@ function ClassicRaidAssistFury:ClearCooldowns()
 end
 
 function ClassicRaidAssistFury:SendMessage(msg, prefix)
-    print(prefix .. " " .. msg)
     local instance, instanceType = IsInInstance()
     if(instance) then
         if(instanceType == "raid") then
@@ -316,7 +315,6 @@ function ClassicRaidAssistFury:OnQuestionItem(prefix, message, distribution, sen
         if (key == message) then
             for k, v in pairs(value['itemIds']) do
                 count  = GetItemCount(v)
-                print(message .. v .. count)
                 if count > 0 then
                     ClassicRaidAssistFury:SendMessage(message, sendItemPrefix)
                     return
